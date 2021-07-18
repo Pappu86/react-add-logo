@@ -5,6 +5,7 @@ const products = [
   {
     id: 1,
     title: "Rain Jacket",
+    path: 'rain-jacket',
     src: "../assets/images/s440bkr_1_3.jpeg",
     minPrice: 9.17,
     maxPrice: 11.52,
@@ -15,6 +16,7 @@ const products = [
   {
     id: 2,
     title: "Turin Premium T-Shirt",
+    path: 'turin-premium-t-shirt',
     src: "../assets/images/b195_royal.jpeg",
     minPrice: 9.17,
     maxPrice: 11.52,
@@ -25,6 +27,7 @@ const products = [
   {
     id: 3,
     title: "Texo Contrast Shorts",
+    path: 'texo-contrast-shorts',
     src: "../assets/images/tx14nar_7.jpeg",
     minPrice: 9.17,
     maxPrice: 11.52,
@@ -45,9 +48,7 @@ const Products = () => {
 
       <Row>
         {products.map((product) => (
-          <Col >
-            <Product key={product.id} product={product} />
-          </Col>
+          <Product key={product.id} product={product} />
         ))}
       </Row>
 

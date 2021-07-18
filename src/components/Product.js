@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 
 const Product = ({ product }) => {
     return (
-        <div>
+        <Col >
             <Card className="product-list">
-                <Link to="/product-details">
+
+                <Link to={{ pathname: `/${product.path}`, params: product }} >
                     <Card.Img variant="top" src={product.src} />
                 </Link>
                 <Card.Body>
@@ -29,7 +30,7 @@ const Product = ({ product }) => {
                     </Row>
                 </Card.Body>
             </Card>
-        </div >
+        </Col>
     )
 }
 
