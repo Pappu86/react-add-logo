@@ -17,10 +17,10 @@ const Product = ({ product }) => {
                     </Card.Text>
                     <hr />
                     <Row>
-                        <Col xs={12} md={3} lg={4}>
+                        <Col xs={12} md={4} lg={4}>
                             <small>{product.color} {product.color > 1 ? 'Colours' : 'Colour'} available</small>
                         </Col>
-                        <Col xs={12} md={9} lg={8} className="badge-area">
+                        <Col xs={12} md={8} lg={8} className="badge-area">
                             {product.isPrint ? <span className="badge bg-primary">Print Available</span>
                                 : ''}
                             {' '}
