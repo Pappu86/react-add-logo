@@ -6,7 +6,7 @@ const Product = ({ product }) => {
         <Col >
             <Card className="product-list">
 
-                <Link to={{ pathname: `/${product.path}`, params: product }} >
+                <Link to={{ pathname: `/${product.path}/${product.id}`, query: product }} >
                     <Card.Img variant="top" src={product.src} />
                 </Link>
                 <Card.Body>

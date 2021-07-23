@@ -11,6 +11,10 @@
   align-items: center; */
 }
 
+.pull-left{
+  float: left;
+}
+
 .pull-right{
   float: right;
 }
@@ -33,11 +37,17 @@
   padding-top: 20px;
 }
 
-.color-box-area, .size-row{
+.color-box-area, .size-row,
+.basket-box-area{
   background-color: #fff;
   border-radius: 3px;
   padding: 20px;
   margin-top: 15px;
+}
+
+.size-box-area{
+  display: flex;
+  flex-direction: column;
 }
 
 .custom-color{
@@ -51,5 +61,18 @@
 
 .step-area .title{
   font-size: 1.5rem;
+  font-weight: 600;
+}
+.size-row{
+  cursor: pointer;
+}
+
+.basket-box-area{
+  margin-bottom: 20px;
+}
+
+.plain-price{
+  font-size: 18px;
+  color: green;
   font-weight: 600;
 }

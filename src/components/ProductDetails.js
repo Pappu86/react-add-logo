@@ -1,15 +1,23 @@
-import { Container, Card, Row, Col } from 'react-bootstrap';
+import { Container, Card, Row, Col, Form } from 'react-bootstrap';
 import { FaCircle, FaCheckCircle } from 'react-icons/fa';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import ProductHelpers from '../settings/ProductsArray';
 
-//import DefaultColors from "../settings/ColorSettings";
-
-const ProductDetails = ({ location }) => {
-    const productInfo = location.params;
-
+const ProductDetails = ({ match }) => {
+    const productId = match.params.id || '';
+    const productInfo = ProductHelpers.GetProductById(productId) || '';
+    const productSrc = productInfo ? productInfo.src : '';
     const [selecedColor, setSelectedColor] = useState(productInfo.selectedColor);
+    const [selecedProductSrc, setSelectedProductSrc] = useState(productSrc);
 
+    useEffect(() => {
+        const productCode = productInfo && productInfo.code ? productInfo.code.toLowerCase() : '';
+        const src = '../assets/images/' + productCode + '_' + selecedColor + '.jpeg';
+        setSelectedProductSrc(src);
+    }, [selecedColor]);
+
+    // Selected color change
     const changeColor = (e) => {
         let newSelectedColor = e.currentTarget.dataset.color;
         console.log("newSelectedColor", newSelectedColor);
@@ -21,13 +29,37 @@ const ProductDetails = ({ location }) => {
             <Row>
                 <Col xs={12} md={3} lg={4}>
                     <Card>
-                        <Card.Img variant="top" src={productInfo.src} />
+                        <Card.Img variant="top" src={selecedProductSrc} />
                     </Card>
                 </Col>
                 <Col xs={12} md={9} lg={8}>
                     <h1>{productInfo.title}</h1>
                     <small>Product Code: {productInfo.code}</small>
-                    <div>Plain Pricing</div>
+                    <div><strong>Plain Pricing</strong></div>
+                    <hr />
+                    <div>
+                        <Row>
+                            <Col>
+                                <div>1 item</div>
+                                <div className="plain-price">£{productInfo.maxPrice}</div>
+                            </Col>
+                            <Col>
+                                <div>25+ items</div>
+                                <div className="plain-price">£10.90</div>
+                                <small>save 5%</small>
+                            </Col>
+                            <Col>
+                                <div>50+ items</div>
+                                <div className="plain-price">£10.19</div>
+                                <small>save 12%</small>
+                            </Col>
+                            <Col>
+                                <div>75+ items</div>
+                                <div className="plain-price">£9.68</div>
+                                <small>save 16%</small>
+                            </Col>
+                        </Row>
+                    </div>
                     <hr />
                     <div className="step-area">
                         <div>
@@ -53,19 +85,38 @@ const ProductDetails = ({ location }) => {
                         <div className="title">2. Sizes & Quantities</div>
                         <div className="size-box-area">
                             <div className="size-row">
-                                dfgdsfg
+                                <div className="pull-left">
+                                    <Form.Group className="mb-3" controlId="small">
+                                        <Form.Check type="checkbox" label="S" />
+                                    </Form.Group>
+                                </div>
+                                <div className="pull-right">fgddfg</div>
                             </div>
                             <div className="size-row">
-                                fdgdsfgdfg
+                                <div className="pull-left">
+                                    <Form.Group className="mb-3" controlId="medium">
+                                        <Form.Check type="checkbox" label="M" />
+                                    </Form.Group>
+                                </div>
+                                <div className="pull-right">dfgdfg</div>
                             </div>
                             <div className="size-row">
-                                fdgfdg
-                            </div>
-                            <div className="size-row">
-                                dfsgdfg
+                                <div className="pull-left">
+                                    <Form.Group className="mb-3" controlId="larg">
+                                        <Form.Check type="checkbox" label="L" />
+                                    </Form.Group>
+                                </div>
+                                <div className="pull-right">
+                                    fdsgdfsgfd
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div className="step-area">
+                        <div className="title">3. Add to basket</div>
+                        <div className="basket-box-area">fgfdg</div>
+                    </div>
+
                 </Col>
             </Row>
         </Container>
