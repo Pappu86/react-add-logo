@@ -45,6 +45,11 @@
   margin-top: 15px;
 }
 
+.size-row{  
+  padding: 0;
+  margin: 15px 0 0 0;
+}
+
 .size-box-area{
   display: flex;
   flex-direction: column;
@@ -63,7 +68,24 @@
   font-size: 1.5rem;
   font-weight: 600;
 }
-.size-row{
+
+.size-row .form-group, 
+.size-row .form-check{
+margin-bottom: 0 !important;
+}
+
+.size-row .form-check input{
+  margin-top: 23px;
+}
+
+.size-row small{
+  margin-top: 20px;
+  float: left;
+}
+
+.form-check-label{
+  display: block;
+  padding: 20px 0;
   cursor: pointer;
 }
 
@@ -75,4 +97,21 @@
   font-size: 18px;
   color: green;
   font-weight: 600;
+}
+
+.counter-area input{
+  width: 70px;
+  border-radius: 0;
+  text-align: center;
+  box-shadow: none !important;
+}
+
+.counter-area span{
+  margin-top: 12px;
+}
+
+.counter-area button{
+  border: 1px solid #ccc;
+  border-radius: 0;
+  box-shadow: none !important;
 }

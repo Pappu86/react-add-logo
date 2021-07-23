@@ -3,6 +3,7 @@ import { FaCircle, FaCheckCircle } from 'react-icons/fa';
 
 import { useState, useEffect } from 'react';
 import ProductHelpers from '../settings/ProductsArray';
+import Counter from './Counter';
 
 const ProductDetails = ({ match }) => {
     const productId = match.params.id || '';
@@ -10,6 +11,14 @@ const ProductDetails = ({ match }) => {
     const productSrc = productInfo ? productInfo.src : '';
     const [selecedColor, setSelectedColor] = useState(productInfo.selectedColor);
     const [selecedProductSrc, setSelectedProductSrc] = useState(productSrc);
+    const [counter, setCounter] = useState(1);
+    const [isSmallSize, setSmallSize] = useState(false);
+    const [isMediumSize, setMediumSize] = useState(false);
+    const [isLargSize, setLargeSize] = useState(false);
+
+    const incrementCounter = () => {
+        setCounter(counter + 1);
+    }
 
     useEffect(() => {
         const productCode = productInfo && productInfo.code ? productInfo.code.toLowerCase() : '';
@@ -22,6 +31,19 @@ const ProductDetails = ({ match }) => {
         let newSelectedColor = e.currentTarget.dataset.color;
         console.log("newSelectedColor", newSelectedColor);
         setSelectedColor(newSelectedColor);
+    };
+
+    const handleChangeChk = (e) => {
+        let newSize = e.currentTarget.dataset.size;
+        let checkbox = e.target.checked;
+
+        if (newSize === 's') {
+            checkbox ? setSmallSize(false) : setSmallSize(true);
+        } else if (newSize === 'm') {
+            checkbox ? setMediumSize(false) : setMediumSize(true);
+        } else if (newSize === 'l') {
+            checkbox ? setLargeSize(false) : setLargeSize(true);
+        }
     };
 
     return (
@@ -84,32 +106,54 @@ const ProductDetails = ({ match }) => {
                     <div className="step-area">
                         <div className="title">2. Sizes & Quantities</div>
                         <div className="size-box-area">
-                            <div className="size-row">
-                                <div className="pull-left">
+                            <Row className="size-row">
+                                <Col xs={12} md={6} lg={7} className="size-items">
                                     <Form.Group className="mb-3" controlId="small">
-                                        <Form.Check type="checkbox" label="S" />
+                                        <Form.Check type="checkbox" label="S" onClick={handleChangeChk} data-size="s" defaultChecked={isSmallSize} />
                                     </Form.Group>
-                                </div>
-                                <div className="pull-right">fgddfg</div>
-                            </div>
-                            <div className="size-row">
-                                <div className="pull-left">
+                                </Col>
+                                <Col xs={12} md={2} lg={2}>
+                                    <small>In Stock</small>
+                                </Col>
+                                <Col xs={12} md={4} lg={3} className="counter-area">
+                                    <Counter fieldName="small" counter={counter} onClick={incrementCounter} />
+                                    {/* <span className="pull-right"><button className="btn"><FaPlus /></button></span>
+                                    <span className="pull-right"><Form.Control type="text" placeholder="0" /></span>
+                                    <span className="pull-right"><button className="btn"><FaMinus /></button></span> */}
+                                </Col>
+                            </Row>
+                            <Row className="size-row">
+                                <Col xs={12} md={6} lg={7} className="size-items">
                                     <Form.Group className="mb-3" controlId="medium">
-                                        <Form.Check type="checkbox" label="M" />
+                                        <Form.Check type="checkbox" label="M" onClick={handleChangeChk} data-size="m" defaultChecked={isMediumSize} />
                                     </Form.Group>
-                                </div>
-                                <div className="pull-right">dfgdfg</div>
-                            </div>
-                            <div className="size-row">
-                                <div className="pull-left">
+                                </Col>
+                                <Col xs={12} md={2} lg={2}>
+                                    <small>In Stock</small>
+                                </Col>
+                                <Col xs={12} md={4} lg={3} className="counter-area">
+                                    <Counter fieldName="medium" counter={counter} />
+                                    {/* <span className="pull-right"><button className="btn"><FaPlus /></button></span>
+                                    <span className="pull-right"><Form.Control type="text" placeholder="0" /></span>
+                                    <span className="pull-right"><button className="btn"><FaMinus /></button></span> */}
+                                </Col>
+                            </Row>
+                            <Row className="size-row">
+                                <Col xs={12} md={6} lg={7} className="size-items">
                                     <Form.Group className="mb-3" controlId="larg">
-                                        <Form.Check type="checkbox" label="L" />
+                                        <Form.Check type="checkbox" label="L" onClick={handleChangeChk} data-size="l" defaultChecked={isLargSize} />
                                     </Form.Group>
-                                </div>
-                                <div className="pull-right">
-                                    fdsgdfsgfd
-                                </div>
-                            </div>
+                                </Col>
+                                <Col xs={12} md={2} lg={2}>
+                                    <small>In Stock</small>
+                                </Col>
+                                <Col xs={12} md={4} lg={3} className="counter-area">
+                                    <Counter fieldName="large" counter={counter} />
+                                    {/* <span className="pull-right"><button className="btn"><FaPlus /></button></span>
+                                    <span className="pull-right"><Form.Control type="text" placeholder="0" /></span>
+                                    <span className="pull-right"><button className="btn"><FaMinus /></button></span> */}
+                                </Col>
+                            </Row>
                         </div>
                     </div>
                     <div className="step-area">
