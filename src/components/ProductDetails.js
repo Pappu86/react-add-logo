@@ -11,14 +11,28 @@ const ProductDetails = ({ match }) => {
     const productSrc = productInfo ? productInfo.src : '';
     const [selecedColor, setSelectedColor] = useState(productInfo.selectedColor);
     const [selecedProductSrc, setSelectedProductSrc] = useState(productSrc);
-    const [counter, setCounter] = useState(1);
     const [isSmallSize, setSmallSize] = useState(false);
     const [isMediumSize, setMediumSize] = useState(false);
     const [isLargSize, setLargeSize] = useState(false);
 
-    const incrementCounter = () => {
-        setCounter(counter + 1);
-    }
+    // Increment/Decrement Counter
+    const [counter, setCounter] = useState(0);
+
+    const handleIncDecCounter = (data) => {
+        let newValue = data ? data.value : 0;
+        let sizeName = data ? data.size : '';
+        let checkbox = document.getElementById(sizeName).checked;
+
+        if ((sizeName && newValue >= 1 && !checkbox) || (sizeName && newValue === 0 && checkbox)) {
+            document.getElementById(sizeName).click();
+        }
+
+        setCounter(newValue);
+    };
+
+    const handleCounterChange = (newValue) => {
+        setCounter(newValue);
+    };
 
     useEffect(() => {
         const productCode = productInfo && productInfo.code ? productInfo.code.toLowerCase() : '';
@@ -37,13 +51,23 @@ const ProductDetails = ({ match }) => {
         let newSize = e.currentTarget.dataset.size;
         let checkbox = e.target.checked;
 
-        if (newSize === 's') {
+        if (newSize === 'small') {
             checkbox ? setSmallSize(false) : setSmallSize(true);
-        } else if (newSize === 'm') {
+        } else if (newSize === 'medium') {
             checkbox ? setMediumSize(false) : setMediumSize(true);
-        } else if (newSize === 'l') {
+        } else if (newSize === 'large') {
             checkbox ? setLargeSize(false) : setLargeSize(true);
         }
+
+        // Counter value update
+        let currentValue = document.getElementById('counter_' + newSize).value * 1 || 0;
+        let newValue = 0;
+
+        if (checkbox) {
+            newValue = currentValue + 1;
+        }
+        setCounter(newValue);
+        document.getElementById("counter_" + newSize).value = newValue;
     };
 
     return (
@@ -107,51 +131,42 @@ const ProductDetails = ({ match }) => {
                         <div className="title">2. Sizes & Quantities</div>
                         <div className="size-box-area">
                             <Row className="size-row">
-                                <Col xs={12} md={6} lg={7} className="size-items">
+                                <Col xs={6} md={6} lg={7} className="size-items">
                                     <Form.Group className="mb-3" controlId="small">
-                                        <Form.Check type="checkbox" label="S" onClick={handleChangeChk} data-size="s" defaultChecked={isSmallSize} />
+                                        <Form.Check type="checkbox" label="S" onClick={handleChangeChk} data-size="small" defaultChecked={isSmallSize} />
                                     </Form.Group>
                                 </Col>
-                                <Col xs={12} md={2} lg={2}>
+                                <Col xs={2} md={2} lg={2}>
                                     <small>In Stock</small>
                                 </Col>
-                                <Col xs={12} md={4} lg={3} className="counter-area">
-                                    <Counter fieldName="small" counter={counter} onClick={incrementCounter} />
-                                    {/* <span className="pull-right"><button className="btn"><FaPlus /></button></span>
-                                    <span className="pull-right"><Form.Control type="text" placeholder="0" /></span>
-                                    <span className="pull-right"><button className="btn"><FaMinus /></button></span> */}
+                                <Col xs={4} md={4} lg={3} className="counter-area">
+                                    <Counter fieldName="small" onClick={handleIncDecCounter} onChange={handleCounterChange} />
                                 </Col>
                             </Row>
                             <Row className="size-row">
-                                <Col xs={12} md={6} lg={7} className="size-items">
+                                <Col xs={6} md={6} lg={7} className="size-items">
                                     <Form.Group className="mb-3" controlId="medium">
-                                        <Form.Check type="checkbox" label="M" onClick={handleChangeChk} data-size="m" defaultChecked={isMediumSize} />
+                                        <Form.Check type="checkbox" label="M" onClick={handleChangeChk} data-size="medium" defaultChecked={isMediumSize} />
                                     </Form.Group>
                                 </Col>
-                                <Col xs={12} md={2} lg={2}>
+                                <Col xs={2} md={2} lg={2}>
                                     <small>In Stock</small>
                                 </Col>
-                                <Col xs={12} md={4} lg={3} className="counter-area">
-                                    <Counter fieldName="medium" counter={counter} />
-                                    {/* <span className="pull-right"><button className="btn"><FaPlus /></button></span>
-                                    <span className="pull-right"><Form.Control type="text" placeholder="0" /></span>
-                                    <span className="pull-right"><button className="btn"><FaMinus /></button></span> */}
+                                <Col xs={4} md={4} lg={3} className="counter-area">
+                                    <Counter fieldName="medium" onClick={handleIncDecCounter} onChange={handleCounterChange} />
                                 </Col>
                             </Row>
                             <Row className="size-row">
-                                <Col xs={12} md={6} lg={7} className="size-items">
-                                    <Form.Group className="mb-3" controlId="larg">
-                                        <Form.Check type="checkbox" label="L" onClick={handleChangeChk} data-size="l" defaultChecked={isLargSize} />
+                                <Col xs={6} md={6} lg={7} className="size-items">
+                                    <Form.Group className="mb-3" controlId="large">
+                                        <Form.Check type="checkbox" label="L" onClick={handleChangeChk} data-size="large" defaultChecked={isLargSize} />
                                     </Form.Group>
                                 </Col>
-                                <Col xs={12} md={2} lg={2}>
+                                <Col xs={2} md={2} lg={2}>
                                     <small>In Stock</small>
                                 </Col>
-                                <Col xs={12} md={4} lg={3} className="counter-area">
-                                    <Counter fieldName="large" counter={counter} />
-                                    {/* <span className="pull-right"><button className="btn"><FaPlus /></button></span>
-                                    <span className="pull-right"><Form.Control type="text" placeholder="0" /></span>
-                                    <span className="pull-right"><button className="btn"><FaMinus /></button></span> */}
+                                <Col xs={4} md={4} lg={3} className="counter-area">
+                                    <Counter fieldName="large" onClick={handleIncDecCounter} onChange={handleCounterChange} />
                                 </Col>
                             </Row>
                         </div>

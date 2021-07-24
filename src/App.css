@@ -111,7 +111,16 @@ margin-bottom: 0 !important;
 }
 
 .counter-area button{
-  border: 1px solid #ccc;
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   border-radius: 0;
   box-shadow: none !important;
+}
+
+.inc-btn{
+  border-right: 1px solid #ccc;;
+}
+
+.dec-btn{
+  border-left: 1px solid #ccc;;
 }
