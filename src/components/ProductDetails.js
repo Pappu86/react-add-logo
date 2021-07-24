@@ -1,4 +1,4 @@
-import { Container, Card, Row, Col, Form } from 'react-bootstrap';
+import { Container, Card, Row, Col, Form, Button } from 'react-bootstrap';
 import { FaCircle, FaCheckCircle } from 'react-icons/fa';
 
 import { useState, useEffect } from 'react';
@@ -14,25 +14,54 @@ const ProductDetails = ({ match }) => {
     const [isSmallSize, setSmallSize] = useState(false);
     const [isMediumSize, setMediumSize] = useState(false);
     const [isLargSize, setLargeSize] = useState(false);
+    let disableBtnClass = '';
 
     // Increment/Decrement Counter
     const [counter, setCounter] = useState(0);
 
     const handleIncDecCounter = (data) => {
-        let newValue = data ? data.value : 0;
+        const counterType = data ? data.counterType : '';
+        let newValue = data ? data.value * 1 : 0;
         let sizeName = data ? data.size : '';
         let checkbox = document.getElementById(sizeName).checked;
+        let currentValue = document.getElementById('counter_' + sizeName).value;
+
+        console.log("data", data);
 
         if ((sizeName && newValue >= 1 && !checkbox) || (sizeName && newValue === 0 && checkbox)) {
             document.getElementById(sizeName).click();
         }
 
+        if (counterType === 'inc') {
+            newValue = counter + 1;
+        } else {
+            console.log("newValue", newValue, "currentValue", currentValue);
+            if (newValue !== 0 || (counter && currentValue > 0 && newValue === 0)) newValue = counter - 1;
+            else newValue = counter;
+        }
+
         setCounter(newValue);
     };
 
-    const handleCounterChange = (newValue) => {
-        setCounter(newValue);
+    // Counter onchange
+    const handleCounterChange = (data) => {
+        let small = document.getElementById('counter_small').value * 1;
+        let medium = document.getElementById('counter_medium').value * 1;
+        let large = document.getElementById('counter_large').value * 1;
+        let newCounterValue = 0;
+
+        if (small) newCounterValue += small;
+        if (medium) newCounterValue += medium;
+        if (large) newCounterValue += large;
+
+        // if (!checkbox) document.getElementById(sizeName).click();
+        setCounter(newCounterValue);
     };
+
+    // Set disable class
+    if (!counter) {
+        disableBtnClass = 'disable-btn';
+    }
 
     useEffect(() => {
         const productCode = productInfo && productInfo.code ? productInfo.code.toLowerCase() : '';
@@ -43,7 +72,6 @@ const ProductDetails = ({ match }) => {
     // Selected color change
     const changeColor = (e) => {
         let newSelectedColor = e.currentTarget.dataset.color;
-        console.log("newSelectedColor", newSelectedColor);
         setSelectedColor(newSelectedColor);
     };
 
@@ -62,11 +90,15 @@ const ProductDetails = ({ match }) => {
         // Counter value update
         let currentValue = document.getElementById('counter_' + newSize).value * 1 || 0;
         let newValue = 0;
+        let counterValue = counter;
 
         if (checkbox) {
             newValue = currentValue + 1;
+            counterValue = counter + 1;
+        } else {
+            counterValue = counter - currentValue;
         }
-        setCounter(newValue);
+        setCounter(counterValue);
         document.getElementById("counter_" + newSize).value = newValue;
     };
 
@@ -79,7 +111,7 @@ const ProductDetails = ({ match }) => {
                     </Card>
                 </Col>
                 <Col xs={12} md={9} lg={8}>
-                    <h1>{productInfo.title}</h1>
+                    <h1 className="product-title">{productInfo.title}</h1>
                     <small>Product Code: {productInfo.code}</small>
                     <div><strong>Plain Pricing</strong></div>
                     <hr />
@@ -173,7 +205,27 @@ const ProductDetails = ({ match }) => {
                     </div>
                     <div className="step-area">
                         <div className="title">3. Add to basket</div>
-                        <div className="basket-box-area">fgfdg</div>
+                        <div className="basket-box-area">
+                            <Row>
+                                <Col xs={4} md={4} lg={4}>
+                                    <div>Total items</div>
+                                    <div className="plain-price">{counter}</div>
+                                </Col>
+                                <Col xs={4} md={4} lg={4}>
+                                    <div>Price per items</div>
+                                    <div className="plain-price">£{productInfo.maxPrice}</div>
+                                </Col>
+                                <Col xs={4} md={4} lg={4}>
+                                    <div>Total (no customisations)</div>
+                                    <div className="plain-price">£{(counter * productInfo.maxPrice).toFixed(2)}</div>
+                                    <small>ex. VAT</small>
+                                </Col>
+                            </Row>
+                            <hr />
+                            <Row>
+                                <Button variant="success addto-btn" className={disableBtnClass}>Add to basket</Button>
+                            </Row>
+                        </div>
                     </div>
 
                 </Col>

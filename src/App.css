@@ -93,6 +93,10 @@ margin-bottom: 0 !important;
   margin-bottom: 20px;
 }
 
+.product-title{
+  color: green;
+}
+
 .plain-price{
   font-size: 18px;
   color: green;
@@ -123,4 +127,19 @@ margin-bottom: 0 !important;
 
 .dec-btn{
   border-left: 1px solid #ccc;;
+}
+
+.inc-btn:hover, .dec-btn:hover{
+  background-color: #f1f1f1;
+}
+
+.addto-btn{
+  width: 200px;
+  margin: 0 auto;
+  box-shadow: none !important;
+}
+
+.disable-btn{
+  opacity: .5;
+  cursor:not-allowed !important;
 }

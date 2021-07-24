@@ -6,7 +6,9 @@ const Counter = (props) => {
 
     const handleCounterChange = (e) => {
         // Here, we invoke the callback with the new value
-        props.onChange(e.target.value);
+        let currentValue = e.target.value * 1;
+
+        props.onChange({ value: currentValue, size: fieldName });
     };
 
     const handleIncDecCounter = (e) => {
@@ -17,15 +19,18 @@ const Counter = (props) => {
             currentValue = currentValue * 1 + 1;
         }
 
-        if (counterType === 'dec') {
+        console.log("currentValue", currentValue, counterType);
+
+        if (counterType === 'dec' && currentValue) {
+            console.log("counterType", counterType);
             currentValue = currentValue * 1 - 1;
 
-            if (currentValue <= 1) {
+            if (currentValue < 1) {
                 currentValue = 0;
             }
         }
 
-        props.onClick({ value: currentValue, size: fieldName });
+        props.onClick({ value: currentValue, size: fieldName, counterType: counterType });
         document.getElementById("counter_" + fieldName).value = currentValue;
     };
 
