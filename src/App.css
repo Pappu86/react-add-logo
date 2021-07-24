@@ -19,6 +19,10 @@
   float: right;
 }
 
+.text-upercase{
+  text-transform: uppercase;;
+}
+
 .page-title{
   padding: 10px;
   color: green;
@@ -134,12 +138,45 @@ margin-bottom: 0 !important;
 }
 
 .addto-btn{
-  width: 200px;
+  width: 180px;
   margin: 0 auto;
   box-shadow: none !important;
 }
 
+.addto-btn .add-icon{
+  margin-top: -4px;
+  margin-right: 5px;
+}
+
 .disable-btn{
   opacity: .5;
+  pointer-events: none;
   cursor:not-allowed !important;
+}
+
+/* Custom modal style */
+.modal-content{
+  min-width: 700px;
+}
+
+.modal-header .close{
+  border:none;
+  background: transparent;
+  font-size: 30px;
+  margin-top: -10px;
+}
+
+.modal-header .close span:last-child{
+display: none;
+}
+
+.add-logo-btn{
+  width: 180px;
+  /* margin: 40px auto 0; */
+}
+
+.total-price{
+  font-size: 25px;
+  color: green;
+  margin: 50px auto 0;
 }

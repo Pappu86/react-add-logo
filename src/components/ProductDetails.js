@@ -1,16 +1,17 @@
 import { Container, Card, Row, Col, Form, Button } from 'react-bootstrap';
-import { FaCircle, FaCheckCircle } from 'react-icons/fa';
+import { FaCircle, FaCheckCircle, FaPlus } from 'react-icons/fa';
 
 import { useState, useEffect } from 'react';
 import ProductHelpers from '../settings/ProductsArray';
 import Counter from './Counter';
+import AddToBasketModal from './AddToBasketModal';
 
 const ProductDetails = ({ match }) => {
     const productId = match.params.id || '';
     const productInfo = ProductHelpers.GetProductById(productId) || '';
     const productSrc = productInfo ? productInfo.src : '';
-    const [selecedColor, setSelectedColor] = useState(productInfo.selectedColor);
-    const [selecedProductSrc, setSelectedProductSrc] = useState(productSrc);
+    const [selectedColor, setSelectedColor] = useState(productInfo.selectedColor);
+    const [selectedProductSrc, setSelectedProductSrc] = useState(productSrc);
     const [isSmallSize, setSmallSize] = useState(false);
     const [isMediumSize, setMediumSize] = useState(false);
     const [isLargSize, setLargeSize] = useState(false);
@@ -26,8 +27,6 @@ const ProductDetails = ({ match }) => {
         let checkbox = document.getElementById(sizeName).checked;
         let currentValue = document.getElementById('counter_' + sizeName).value;
 
-        console.log("data", data);
-
         if ((sizeName && newValue >= 1 && !checkbox) || (sizeName && newValue === 0 && checkbox)) {
             document.getElementById(sizeName).click();
         }
@@ -35,7 +34,6 @@ const ProductDetails = ({ match }) => {
         if (counterType === 'inc') {
             newValue = counter + 1;
         } else {
-            console.log("newValue", newValue, "currentValue", currentValue);
             if (newValue !== 0 || (counter && currentValue > 0 && newValue === 0)) newValue = counter - 1;
             else newValue = counter;
         }
@@ -65,9 +63,9 @@ const ProductDetails = ({ match }) => {
 
     useEffect(() => {
         const productCode = productInfo && productInfo.code ? productInfo.code.toLowerCase() : '';
-        const src = '../assets/images/' + productCode + '_' + selecedColor + '.jpeg';
+        const src = '../assets/images/' + productCode + '_' + selectedColor + '.jpeg';
         setSelectedProductSrc(src);
-    }, [selecedColor]);
+    }, [selectedColor]);
 
     // Selected color change
     const changeColor = (e) => {
@@ -102,12 +100,31 @@ const ProductDetails = ({ match }) => {
         document.getElementById("counter_" + newSize).value = newValue;
     };
 
+    // Show add to basket modal
+    const [show, setShow] = useState(false);
+    let modalData = {
+        title: productInfo.title,
+        selectedColor: selectedColor,
+        selectedProductSrc: selectedProductSrc,
+        code: productInfo.code,
+        totalItems: counter,
+        price: productInfo.maxPrice
+    };
+
+    const handleShowModal = () => {
+        setShow(true);
+    };
+
+    const handleClose = () => {
+        setShow(false);
+    };
+
     return (
         <Container fluid className="product-details">
             <Row>
                 <Col xs={12} md={3} lg={4}>
                     <Card>
-                        <Card.Img variant="top" src={selecedProductSrc} />
+                        <Card.Img variant="top" src={selectedProductSrc} />
                     </Card>
                 </Col>
                 <Col xs={12} md={9} lg={8}>
@@ -149,10 +166,10 @@ const ProductDetails = ({ match }) => {
                         <div className="color-box-area">
                             {productInfo.colors.map((color, index) => (
                                 <span key={index} onClick={changeColor} data-color={color}>
-                                    {selecedColor === color &&
+                                    {selectedColor === color &&
                                         <FaCheckCircle size="2em" color={color} className="custom-color" />
                                     }
-                                    {selecedColor !== color &&
+                                    {selectedColor !== color &&
                                         <FaCircle size="2em" color={color} className="custom-color" />
                                     }
                                 </span>
@@ -223,7 +240,8 @@ const ProductDetails = ({ match }) => {
                             </Row>
                             <hr />
                             <Row>
-                                <Button variant="success addto-btn" className={disableBtnClass}>Add to basket</Button>
+                                <Button variant="success addto-btn" className={disableBtnClass} onClick={handleShowModal}> <FaPlus className="add-icon" /> Add to basket</Button>
+                                <AddToBasketModal show={show} onHide={handleClose} modalData={modalData} />
                             </Row>
                         </div>
                     </div>
