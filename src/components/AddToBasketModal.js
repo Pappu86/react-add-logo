@@ -18,30 +18,22 @@ const AddToBasketModal = (props) => {
                         </Card>
                     </Col>
                     <Col xs={6} md={6} lg={6}>
-                        <h3>{data.title}</h3>
+                        <h4>{data.title}</h4>
                         <div>Product code: {data.code}</div>
                         <div>Color: <span className="text-upercase">{data.selectedColor}</span></div>
                         <div>Items: {data.totalItems}</div>
                         <div>Per Item: £{data.price}</div>
                     </Col>
                     <Col xs={3} md={3} lg={3}>
-                        <div className="total-price">£{data.price * data.totalItems}</div>
+                        <div className="total-price">£{(data.price * data.totalItems).toFixed(2)}</div>
                         <small>ex. VAT</small>
                     </Col>
                 </Row>
-                {/* <Row>
-                    <Button variant="success" className="add-logo-btn" onClick={props.onHide}>
-                        Add your logo now
-                    </Button>
-                </Row> */}
             </Modal.Body>
             <Modal.Footer>
-                <Link to="" className="btn btn-success">
+                <Link to="/customisation" className="btn btn-success">
                     Add your logo now
                 </Link>
-                {/* <Button variant="success" onClick={props.onHide}>
-                    Add your logo now
-                </Button> */}
                 <Button variant="secondary" onClick={props.onHide}>Close</Button>
             </Modal.Footer>
         </Modal>

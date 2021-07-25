@@ -87,7 +87,7 @@ margin-bottom: 0 !important;
   float: left;
 }
 
-.form-check-label{
+.size-items .form-check-label{
   display: block;
   padding: 20px 0;
   cursor: pointer;
@@ -179,4 +179,56 @@ display: none;
   font-size: 25px;
   color: green;
   margin: 50px auto 0;
+}
+
+/* Logo customisations page */
+.logo-customisation{
+}
+
+.logo-card{
+  margin-bottom: 25px;
+}
+
+.logo-image{
+  width: 200px;
+  margin: 0 auto;
+}
+
+.logo-customisation .card-body{
+  text-align: center;
+}
+
+.step-title-area{
+  margin: 20px 0;
+}
+
+.logo-type-area{
+  margin-top: 10px;
+}
+
+.logo-type{
+  margin-right: 20px;  
+}
+
+.logo-type-icon{
+  color: green;
+  margin-top: -3px;
+}
+
+.card-checkbox .form-check-input{
+  float: none;
+  font-size: 25px;
+  box-shadow: none;
+  border-radius: 3px;
+}
+
+.card-checkbox .form-check-label{
+  display: block;
+  position: absolute;
+  z-index: 999;
+  cursor: pointer;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
 }

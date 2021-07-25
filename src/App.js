@@ -4,6 +4,7 @@ import './App.css';
 
 import Products from './components/Products';
 import ProductDetails from './components/ProductDetails';
+import LogoCustomisation from "./components/LogoCustomisation";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Products} />
           <Route exact path="/:productname/:id" component={ProductDetails} />
+          <Route exact path="/customisation" component={LogoCustomisation} />
         </Switch>
       </Router>
     </div>
