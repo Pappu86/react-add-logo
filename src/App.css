@@ -25,7 +25,7 @@
 
 .page-title{
   padding: 10px;
-  color: green;
+  color: #198754;
   text-align: center;
 }
 
@@ -98,12 +98,12 @@ margin-bottom: 0 !important;
 }
 
 .product-title{
-  color: green;
+  color: #198754;
 }
 
 .plain-price{
   font-size: 18px;
-  color: green;
+  color: #198754;
   font-weight: 600;
 }
 
@@ -177,7 +177,7 @@ display: none;
 
 .total-price{
   font-size: 25px;
-  color: green;
+  color: #198754;
   margin: 50px auto 0;
 }
 
@@ -211,7 +211,7 @@ display: none;
 }
 
 .logo-type-icon{
-  color: green;
+  color: #198754;
   margin-top: -3px;
 }
 
@@ -236,13 +236,36 @@ display: none;
 .appl-method-area{
   background: #fff;
   margin-top: 20px;
-  padding: 20px 0;
+  padding: 30px 0;
+  cursor: pointer;
+  border: 1px solid transparent;
 }
 
-.appl-method-area .radio-box,
-.appl-method-area .method-icon{
-  width: 5%;
-  background: pink;
-  text-align: center;
+.appl-method-area .form-check-input{
   font-size: 30px;
+  margin-left: 5px;
+}
+
+.appl-method-area .method-icon{
+  font-size: 45px; 
+}
+
+.appl-method-area .form-check-label{
+    position: absolute;
+    width: 93%;
+    margin-top: -26px;
+    display: block;
+    margin-left: -35px;
+    height: 100px;
+}
+
+.active-appl-method{
+  color: #198754;
+  border: 1px solid #198754;
+}
+
+/* Form style */
+.form-check-input:checked {
+  background-color: #198754;
+  border-color: #198754;
 }

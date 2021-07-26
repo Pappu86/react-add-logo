@@ -11,12 +11,18 @@ const LogoCustomisation = () => {
     console.log("This is parent");
 
     const [selectedPositions, setSelectedPositions] = useState([]);
-    const [newValue, setNewValue] = useState("a");
+    const [appMethodName, setAppMethodName] = useState("");
 
     const handleLogoPosition = (data) => {
         const positions = data.positions;
         console.log("handleLogoPosition: ", positions);
         setSelectedPositions(positions);
+    };
+
+    const handleAppMethod = (data) => {
+        console.log("Data", data);
+        const name = data.name;
+        setAppMethodName(name);
     };
 
     let stepProgress = [
@@ -30,7 +36,7 @@ const LogoCustomisation = () => {
             label: 'Application',
             subtitle: '',
             name: 'step 2',
-            content: <ApplicationMethod />
+            content: <ApplicationMethod name={appMethodName} onClick={handleAppMethod} />
         },
         {
             label: 'Artwork',
@@ -56,6 +62,7 @@ const LogoCustomisation = () => {
 
     useEffect(() => {
         console.log("selectedPositions: ", selectedPositions);
+        console.log("appMethodName", appMethodName);
         setSelectedPositions(selectedPositions);
     }, []);
 
@@ -76,7 +83,7 @@ const LogoCustomisation = () => {
             </Row>
             <Row>
                 <div className="step-bar">
-                    <StepProgressBar startingStep={0} onSubmit={onFormSubmit} steps={stepProgress} onChange={newValue} />;
+                    <StepProgressBar startingStep={0} onSubmit={onFormSubmit} steps={stepProgress} />;
                 </div>
             </Row>
         </Container>
