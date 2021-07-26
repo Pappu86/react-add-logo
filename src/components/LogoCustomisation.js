@@ -1,26 +1,36 @@
+//import _ from 'underscore';
 import { Container, Row, Col, } from 'react-bootstrap';
 import 'react-step-progress/dist/index.css';
 import StepProgressBar from 'react-step-progress';
 
+import { useState, useEffect } from 'react';
 import ChoosePosition from './stepProgress/ChoosePosition';
+import ApplicationMethod from './stepProgress/ApplicationMethod';
 
 const LogoCustomisation = () => {
-    const step1Content = ChoosePosition();
-    const step2Content = <h1>Step 2 Content</h1>;
-    const step3Content = <h1>Step 3 Content</h1>;
+    console.log("This is parent");
 
-    const stepProgress = [
+    const [selectedPositions, setSelectedPositions] = useState([]);
+    const [newValue, setNewValue] = useState("a");
+
+    const handleLogoPosition = (data) => {
+        const positions = data.positions;
+        console.log("handleLogoPosition: ", positions);
+        setSelectedPositions(positions);
+    };
+
+    let stepProgress = [
         {
             label: 'Positio',
             subtitle: '',
             name: 'step 1',
-            content: step1Content
+            content: <ChoosePosition positions={selectedPositions} onClick={handleLogoPosition} />
         },
         {
             label: 'Application',
             subtitle: '',
             name: 'step 2',
-            content: <h1>Step 2 Content</h1>
+            content: <ApplicationMethod />
         },
         {
             label: 'Artwork',
@@ -42,6 +52,12 @@ const LogoCustomisation = () => {
         }
     ];
 
+    console.log("stepProgress", stepProgress);
+
+    useEffect(() => {
+        console.log("selectedPositions: ", selectedPositions);
+        setSelectedPositions(selectedPositions);
+    }, []);
 
 
     function onFormSubmit() {
@@ -54,10 +70,13 @@ const LogoCustomisation = () => {
         <Container fluid className="logo-customisation">
             <Row>
                 <Col><h1 className="page-title">Add Customisation</h1></Col>
+                <div>
+                    {/* <ChoosePosition positions={selectedPositions} onClick={handleLogoPosition} /> */}
+                </div>
             </Row>
             <Row>
                 <div className="step-bar">
-                    <StepProgressBar startingStep={0} onSubmit={onFormSubmit} steps={stepProgress} />;
+                    <StepProgressBar startingStep={0} onSubmit={onFormSubmit} steps={stepProgress} onChange={newValue} />;
                 </div>
             </Row>
         </Container>

@@ -232,3 +232,17 @@ display: none;
   top: 0;
   left: 0;
 }
+
+.appl-method-area{
+  background: #fff;
+  margin-top: 20px;
+  padding: 20px 0;
+}
+
+.appl-method-area .radio-box,
+.appl-method-area .method-icon{
+  width: 5%;
+  background: pink;
+  text-align: center;
+  font-size: 30px;
+}
