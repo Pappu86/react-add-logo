@@ -2,6 +2,11 @@
   height: 100%;
 }
 
+body{
+  font-family: "Roboto", "Roboto Mono" !important;
+  background-color: #f1f1f1;
+}
+
 .App {
   height: 100%;  
   display: flex;    
@@ -233,7 +238,8 @@ display: none;
   left: 0;
 }
 
-.appl-method-area{
+.appl-method-area,
+.artwork-area{
   background: #fff;
   margin-top: 20px;
   padding: 30px 0;
@@ -259,13 +265,102 @@ display: none;
     height: 100px;
 }
 
-.active-appl-method{
+.active-area{
   color: #198754;
   border: 1px solid #198754;
+}
+
+.artwork-area .form-check-input{
+  font-size: 30px;
+  margin-left: 5px;
+  margin-top: 10px;
+}
+
+.new-circle{
+  border: 1px dashed #198754;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    line-height: 3;
+    text-align: center;
+    font-weight: 400;
+    color: #198754;
+}
+
+.artwork-text{
+  margin-top: 12px;
 }
 
 /* Form style */
 .form-check-input:checked {
   background-color: #198754;
   border-color: #198754;
+}
+
+.form-field-area{
+  margin-top: 20px;
+}
+
+.form-check [type=radio]{
+  font-size: 30px;
+  /* margin-left: -25px; */
+}
+
+/* Setep bar custome */
+.step-circle ._2kL0S{
+  background-color: #ccc !important;
+}
+
+._35Ago ._2kL0S{
+  background-color: #387cf6 !important;
+}
+
+.primary-btn, .secondary-btn{
+  text-decoration: none;
+}
+
+.primary-btn:hover{
+  color: #fff;
+}
+
+/* Custome font picker */
+#font-picker{
+  width: 100%;
+  background: #fff;
+}
+
+#font-picker{
+  box-shadow: none;
+}
+
+#font-picker .dropdown-button{  
+  color: #212529;
+  border: 1px solid #ced4da;
+  font-weight: 400;
+  line-height: 1.5;
+  background: #fff;
+  height: 50px;
+  padding: 0 15px;
+  box-shadow: none !important;  
+  border-radius: .3rem;
+}
+
+div[id^=font-picker] ul li {
+  height: 49px !important;
+  color: #212529;
+  border: 1px solid #ced4da;
+  background: #fff;
+}
+
+div[id^=font-picker] ul li button:hover, 
+div[id^=font-picker] ul li button:focus {
+  background: #f1f1f1 !important;
+}
+
+.apply-font{
+  margin-top: 20px;
+  text-align: center;
+  border: 1px solid #ced4da;
+  background: #fff;
+  padding: 30px 0;
 }

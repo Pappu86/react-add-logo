@@ -41,7 +41,7 @@ const ApplicationMethod = (props) => {
             <Row className="step-title-area">
                 <h4>2. Choose application method</h4>
             </Row>
-            <Row className={`appl-method-area ${isEmbroidery ? "active-appl-method" : ""}`}>
+            <Row className={`appl-method-area ${isEmbroidery ? "active-area" : ""}`}>
                 <Col md={1}>
                     <Form.Group className="mb-3" controlId="embroidery">
                         <Form.Check type="radio" label="" defaultChecked={isEmbroidery} data-type="embroidery" onClick={handleAppMethod} />
@@ -53,7 +53,7 @@ const ApplicationMethod = (props) => {
                     <div>Detailed and durable ideal for uniforms.</div>
                 </Col>
             </Row>
-            <Row className={`appl-method-area ${isPrint ? "active-appl-method" : ""}`}>
+            <Row className={`appl-method-area ${isPrint ? "active-area" : ""}`}>
                 <Col md={1}>
                     <Form.Group className="mb-3" controlId="print">
                         <Form.Check type="radio" label="" defaultChecked={isPrint} data-type="print" onClick={handleAppMethod} />

@@ -4,9 +4,16 @@ import { FaDotCircle, FaStarOfDavid } from 'react-icons/fa';
 
 import { useState, useEffect } from 'react';
 
+//Redux
+import { connect, useDispatch } from "react-redux";
+import { stepBarOne } from './../../store/actions/logoCustomisation';
+import { singleProductType } from './../../modelTypes/store';
+
 const ChoosePosition = (props) => {
     console.log("This is child");
     console.log("props", props);
+
+    const dispatch = useDispatch();
 
     const [isLeftBreast, setLeftBreast] = useState(false);
     const [isRightBreast, setRightBreast] = useState(false);
@@ -28,6 +35,9 @@ const ChoosePosition = (props) => {
         selectedArray = _.uniq(selectedArray);
 
         console.log("final array", selectedArray);
+
+        dispatch(stepBarOne({ positions: selectedArray }));
+
         props.onClick({ positions: selectedArray });
     };
 
@@ -162,4 +172,4 @@ const ChoosePosition = (props) => {
     )
 }
 
-export default ChoosePosition
+export default connect("", { stepBarOne })(ChoosePosition);
