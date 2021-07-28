@@ -1,7 +1,11 @@
 import { Row, Col, Form } from 'react-bootstrap';
 import { useState } from 'react';
 
-const Artwork = () => {
+const Artwork = (props) => {
+    console.log("This is child Artwork");
+    console.log("props", props);
+    props.setStepper(2);
+
     const [isArtwork, setArtwork] = useState(true);
 
     return (

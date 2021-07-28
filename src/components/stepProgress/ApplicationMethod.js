@@ -4,8 +4,11 @@ import { FaBuffer, FaStarOfDavid } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 
 const ApplicationMethod = (props) => {
+    console.log("This is child Application method");
     console.log("props", props);
-    props.stepperEvent(1);
+
+    props.setStepper(1);
+
     const [isEmbroidery, setEmbroidery] = useState(true);
     const [isPrint, setPrint] = useState(false);
 

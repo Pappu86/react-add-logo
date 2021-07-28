@@ -9,29 +9,26 @@ import ApplicationMethod from './stepProgress/ApplicationMethod';
 import Artwork from './stepProgress/Artwork';
 import ApplicationType from './stepProgress/ApplicationType';
 import ConfigureLogo from './stepProgress/ConfigureLogo';
-
-import { connect, useDispatch } from "react-redux";
-import { stepBarOne } from './../store/actions/logoCustomisation';
+import _ from 'underscore';
 
 const LogoCustomisation = () => {
     console.log("This is parent");
 
-
-    let newArray = [];
-
-    const dispatch = useDispatch();
     const [selectedPositions, setSelectedPositions] = useState([]);
     const [appMethodName, setAppMethodName] = useState("");
     const [appMethodTypeName, setAppMethodTypeName] = useState("");
-    const [stepDataOne, setStepDataOne] = useState("");
-    const [currectStepper, setCurrectStepper] = useState("");
+    const [currentStep, setCurrentStep] = useState("");
+    let newArray = [];
 
-    console.log("stepDataOne", stepDataOne);
+    const handelStepper = (step) => {
+        console.log("final_step", step);
+        setCurrentStep(step);
+    };
 
     const handleLogoPosition = (data) => {
         const positions = data.positions;
+        console.log("handleLogoPosition_12345656756655: ", positions);
         newArray = positions;
-        console.log("handleLogoPosition-12345656756655: ", positions);
         setSelectedPositions(positions);
     };
 
@@ -48,45 +45,34 @@ const LogoCustomisation = () => {
     };
 
     function step1Validator() {
-        // return a boolean
-        console.log("pappu-click");
-        console.log("newArray-000000000:", newArray);
-        dispatch(stepBarOne({ positions: newArray }));
-        console.log("newArray-000000000:", newArray);
         return true;
     }
-
-    const stepperEvent = (currentStepper) => {
-        console.log("currentStepper", currentStepper);
-        setCurrectStepper(currentStepper);
-    };
-
 
     let stepProgress = [
         {
             label: 'Positio',
             subtitle: '',
             name: 'step 1',
-            content: <ChoosePosition positions={selectedPositions} onClick={handleLogoPosition} stepperEvent={stepperEvent} />,
+            content: <ChoosePosition positions={selectedPositions} onClick={handleLogoPosition} setStepper={handelStepper} />,
             validator: step1Validator
         },
         {
             label: 'Application',
             subtitle: '',
             name: 'step 2',
-            content: <ApplicationMethod name={appMethodName} onClick={handleAppMethod} stepperEvent={stepperEvent} />
+            content: <ApplicationMethod name={appMethodName} onClick={handleAppMethod} setStepper={handelStepper} />
         },
         {
             label: 'Artwork',
             subtitle: '',
             name: 'step 3',
-            content: <Artwork />
+            content: <Artwork setStepper={handelStepper} />
         },
         {
             label: 'Type',
             subtitle: '',
             name: 'step 4',
-            content: <ApplicationType name={appMethodTypeName} onClick={handleAppType} />
+            content: <ApplicationType name={appMethodTypeName} onClick={handleAppType} setStepper={handelStepper} />
         },
         {
             label: 'Configure logo',
@@ -96,13 +82,22 @@ const LogoCustomisation = () => {
         }
     ];
 
-    console.log("stepProgress", stepProgress);
+
 
     useEffect(() => {
-        console.log("selectedPositions-111111: ", selectedPositions);
-        //console.log("appMethodName", appMethodName);        
-        console.log("newArray-000000000:", newArray);
-    }, [selectedPositions]);
+        console.log("useEffect_selectedPositions_111111: ", selectedPositions);
+        setSelectedPositions(selectedPositions);
+        console.log("useEffect_currentStep", currentStep);
+        console.log("useEffect_stepProgress", stepProgress);
+
+        stepProgress = _.map(stepProgress, (item, index) => {
+            console.log("item", item, index);
+            if (index === currentStep) {
+                item.lastUpdate = new Date();
+            }
+        });
+
+    }, [selectedPositions, stepProgress, currentStep]);
 
 
     function onFormSubmit(e) {
@@ -131,12 +126,4 @@ const LogoCustomisation = () => {
     )
 }
 
-//Redux dispatch for product item component
-const mapStateToProps = (state) => {
-    console.log("....state:", state);
-    return ({
-        stepDataOne: state.LogoCustomisatin.stepBarOne,
-    })
-};
-
-export default connect(mapStateToProps, { stepBarOne })(LogoCustomisation);
+export default LogoCustomisation;

@@ -4,17 +4,11 @@ import { FaDotCircle, FaStarOfDavid } from 'react-icons/fa';
 
 import { useState, useEffect } from 'react';
 
-//Redux
-import { connect, useDispatch } from "react-redux";
-import { stepBarOne } from './../../store/actions/logoCustomisation';
-import { singleProductType } from './../../modelTypes/store';
-
 const ChoosePosition = (props) => {
-    console.log("This is child");
+    console.log("This is child Choose position");
     console.log("props", props);
-    props.stepperEvent(0);
 
-    const dispatch = useDispatch();
+    props.setStepper(0);
 
     const [isLeftBreast, setLeftBreast] = useState(false);
     const [isRightBreast, setRightBreast] = useState(false);
@@ -22,6 +16,10 @@ const ChoosePosition = (props) => {
     const [isRightSleeve, setRightSleeve] = useState(false);
     const [isBigBack, setBigBack] = useState(false);
     const [isNeck, setNeck] = useState(false);
+
+    useEffect(() => {
+        console.log("selectedPositions_2222: ", props);
+    }, [props]);
 
     const handleLogoPosition = (event) => {
         const position = event.currentTarget.dataset.position;
@@ -35,14 +33,10 @@ const ChoosePosition = (props) => {
 
         selectedArray = _.uniq(selectedArray);
 
-        console.log("final array", selectedArray);
+        console.log("final_array", selectedArray);
 
         props.onClick({ positions: selectedArray });
     };
-
-    useEffect(() => {
-        console.log("selectedPositions-2222: ", props.selectedPositions);
-    }, []);
 
     return (
         <div>
@@ -171,4 +165,4 @@ const ChoosePosition = (props) => {
     )
 }
 
-export default connect("", { stepBarOne })(ChoosePosition);
+export default ChoosePosition;

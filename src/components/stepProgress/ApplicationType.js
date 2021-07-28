@@ -4,7 +4,11 @@ import { useState, useEffect } from 'react';
 
 
 const ApplicationType = (props) => {
-    props.stepperEvent(2);
+    console.log("This is child  Application type");
+    console.log("props", props);
+
+    props.setStepper(3);
+
     const [isLogo, setLogo] = useState(true);
     const [isText, setText] = useState(false);
 
