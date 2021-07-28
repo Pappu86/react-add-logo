@@ -91,7 +91,7 @@ const LogoCustomisation = () => {
         console.log("useEffect_stepProgress", stepProgress);
 
         stepProgress = _.map(stepProgress, (item, index) => {
-            console.log("item", item, index);
+            //console.log("item", item, index);
             if (index === currentStep) {
                 item.lastUpdate = new Date();
             }
