@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 
 const ApplicationType = (props) => {
+    props.stepperEvent(2);
     const [isLogo, setLogo] = useState(true);
     const [isText, setText] = useState(false);
 

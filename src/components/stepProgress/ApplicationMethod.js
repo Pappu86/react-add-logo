@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 
 const ApplicationMethod = (props) => {
     console.log("props", props);
+    props.stepperEvent(1);
     const [isEmbroidery, setEmbroidery] = useState(true);
     const [isPrint, setPrint] = useState(false);
 

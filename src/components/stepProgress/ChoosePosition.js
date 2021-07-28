@@ -12,6 +12,7 @@ import { singleProductType } from './../../modelTypes/store';
 const ChoosePosition = (props) => {
     console.log("This is child");
     console.log("props", props);
+    props.stepperEvent(0);
 
     const dispatch = useDispatch();
 
@@ -35,8 +36,6 @@ const ChoosePosition = (props) => {
         selectedArray = _.uniq(selectedArray);
 
         console.log("final array", selectedArray);
-
-        dispatch(stepBarOne({ positions: selectedArray }));
 
         props.onClick({ positions: selectedArray });
     };

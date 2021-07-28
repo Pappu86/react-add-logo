@@ -16,15 +16,21 @@ import { stepBarOne } from './../store/actions/logoCustomisation';
 const LogoCustomisation = () => {
     console.log("This is parent");
 
+
     let newArray = [];
 
     const dispatch = useDispatch();
     const [selectedPositions, setSelectedPositions] = useState([]);
     const [appMethodName, setAppMethodName] = useState("");
     const [appMethodTypeName, setAppMethodTypeName] = useState("");
+    const [stepDataOne, setStepDataOne] = useState("");
+    const [currectStepper, setCurrectStepper] = useState("");
+
+    console.log("stepDataOne", stepDataOne);
 
     const handleLogoPosition = (data) => {
         const positions = data.positions;
+        newArray = positions;
         console.log("handleLogoPosition-12345656756655: ", positions);
         setSelectedPositions(positions);
     };
@@ -41,14 +47,19 @@ const LogoCustomisation = () => {
         setAppMethodName(name);
     };
 
-    function step1Validator(props) {
+    function step1Validator() {
         // return a boolean
-        console.log("pappu-click", props);
+        console.log("pappu-click");
         console.log("newArray-000000000:", newArray);
-        dispatch(stepBarOne({ positions: selectedPositions }));
+        dispatch(stepBarOne({ positions: newArray }));
         console.log("newArray-000000000:", newArray);
         return true;
     }
+
+    const stepperEvent = (currentStepper) => {
+        console.log("currentStepper", currentStepper);
+        setCurrectStepper(currentStepper);
+    };
 
 
     let stepProgress = [
@@ -56,14 +67,14 @@ const LogoCustomisation = () => {
             label: 'Positio',
             subtitle: '',
             name: 'step 1',
-            content: <ChoosePosition positions={selectedPositions} onClick={handleLogoPosition} />,
+            content: <ChoosePosition positions={selectedPositions} onClick={handleLogoPosition} stepperEvent={stepperEvent} />,
             validator: step1Validator
         },
         {
             label: 'Application',
             subtitle: '',
             name: 'step 2',
-            content: <ApplicationMethod name={appMethodName} onClick={handleAppMethod} />
+            content: <ApplicationMethod name={appMethodName} onClick={handleAppMethod} stepperEvent={stepperEvent} />
         },
         {
             label: 'Artwork',
@@ -89,8 +100,7 @@ const LogoCustomisation = () => {
 
     useEffect(() => {
         console.log("selectedPositions-111111: ", selectedPositions);
-        //console.log("appMethodName", appMethodName);
-        newArray = selectedPositions;
+        //console.log("appMethodName", appMethodName);        
         console.log("newArray-000000000:", newArray);
     }, [selectedPositions]);
 
@@ -100,6 +110,7 @@ const LogoCustomisation = () => {
         // This function will be executed at the last step
         // when the submit button (next button in the previous steps) is pressed
     }
+
 
     return (
         <Container fluid className="logo-customisation">
@@ -120,4 +131,12 @@ const LogoCustomisation = () => {
     )
 }
 
-export default connect("", { stepBarOne })(LogoCustomisation);
+//Redux dispatch for product item component
+const mapStateToProps = (state) => {
+    console.log("....state:", state);
+    return ({
+        stepDataOne: state.LogoCustomisatin.stepBarOne,
+    })
+};
+
+export default connect(mapStateToProps, { stepBarOne })(LogoCustomisation);
