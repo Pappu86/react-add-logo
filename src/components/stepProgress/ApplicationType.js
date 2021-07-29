@@ -1,22 +1,17 @@
 import { Row, Col, Form } from 'react-bootstrap';
 import { FaStarOfLife, FaTextHeight } from 'react-icons/fa';
 
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { AddCustomisationContext } from '../LogoCustomisation';
 
 
 const ApplicationType = () => {
-    console.log("This is child  Application type");
     const { methodTypeName, handleAppType } = useContext(AddCustomisationContext);
-
-    const [isLogo, setLogo] = useState(true);
-    const [isText, setText] = useState(false);
 
     const changeAppType = (event) => {
         const applTypeName = event.currentTarget.dataset.type;
         const isChecked = document.getElementById(applTypeName).checked;
 
-        console.log("applTypeName", applTypeName, "isChecked: ", isChecked);
         handleAppType({ name: applTypeName, value: isChecked });
     };
 

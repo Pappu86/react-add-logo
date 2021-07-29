@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
 #root{
   height: 100%;
 }
 
 body{
-  font-family: "Roboto", "Roboto Mono" !important;
+  font-family: 'Roboto Condensed', sans-serif;
   background-color: #f1f1f1;
 }
 
@@ -32,6 +34,11 @@ body{
   padding: 10px;
   color: #198754;
   text-align: center;
+}
+
+.error-text{
+  color: red;
+  margin-bottom: 20px;
 }
 
 .product-list .card-body{
@@ -84,7 +91,10 @@ margin-bottom: 0 !important;
 }
 
 .size-row .form-check input{
-  margin-top: 23px;
+  margin-top: 20px;
+  font-size: 25px;
+  margin-left: -15px;
+  border-radius: 3px;
 }
 
 .size-row small{
@@ -94,7 +104,7 @@ margin-bottom: 0 !important;
 
 .size-items .form-check-label{
   display: block;
-  padding: 20px 0;
+  padding: 20px 10px 20px 20px;
   cursor: pointer;
 }
 
@@ -153,10 +163,23 @@ margin-bottom: 0 !important;
   margin-right: 5px;
 }
 
-.disable-btn{
+.disable-btn,
+.disable-embroidery{
   opacity: .5;
   pointer-events: none;
   cursor:not-allowed !important;
+}
+
+.warning-color{
+  color: #e05f01;
+}
+
+.hide{
+  display: none;
+}
+
+.disable-container{
+  display: block !important;
 }
 
 /* Custom modal style */
@@ -187,9 +210,6 @@ display: none;
 }
 
 /* Logo customisations page */
-.logo-customisation{
-}
-
 .logo-card{
   margin-bottom: 25px;
 }
@@ -216,7 +236,7 @@ display: none;
 }
 
 .logo-type-icon{
-  color: #198754;
+  color: #387cf6;
   margin-top: -3px;
 }
 
@@ -269,8 +289,8 @@ display: none;
 }
 
 .active-area{
-  color: #198754;
-  border: 1px solid #198754;
+  color: #387cf6;
+  border: 1px solid #387cf6;
 }
 
 .artwork-area .form-check-input{
@@ -280,14 +300,14 @@ display: none;
 }
 
 .new-circle{
-  border: 1px dashed #198754;
+  border: 1px dashed #387cf6;
   border-radius: 50%;
   width: 50px;
   height: 50px;
   line-height: 3;
   text-align: center;
   font-weight: 400;
-  color: #198754;
+  color: #387cf6;
 }
 
 .artwork-text{
@@ -296,8 +316,8 @@ display: none;
 
 /* Form style */
 .form-check-input:checked {
-  background-color: #198754;
-  border-color: #198754;
+  background-color: #387cf6;
+  border-color: #387cf6;
 }
 
 .form-field-area{
@@ -321,8 +341,34 @@ display: none;
   text-decoration: none;
 }
 
+.primary-btn{
+  margin-right: 20px;
+}
+
+.secondary-btn{
+  margin-left: 20px;
+}
+
 .primary-btn:hover{
   color: #fff;
+}
+
+.logo-configuration .form-check-input{
+  margin-left: -20px;
+}
+
+.logo-configuration .form-check-label{
+  margin-left: 10px;
+  margin-top: 12px;
+  cursor: pointer;
+}
+
+.contact-me{
+  margin-left: 45px;
+}
+
+.dropdown-area{
+  background: #fff;
 }
 
 /* Custome font picker */
@@ -365,4 +411,19 @@ div[id^=font-picker] ul li button:focus {
   border: 1px solid #ced4da;
   background: #fff;
   padding: 30px 0;
+}
+
+/* Custom drag & drop style */
+.dropzone-area{
+  margin-bottom: 20px;
+}
+.dropzone{
+  text-align: center;
+  background: #fff;
+  min-height: 200px;
+  border: 1px dashed #ddd;
+}
+
+.dropzone p{
+  margin-top: 55px;
 }

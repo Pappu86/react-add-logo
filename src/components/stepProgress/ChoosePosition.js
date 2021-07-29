@@ -2,14 +2,15 @@ import _ from 'underscore';
 import { Row, Col, Card, Form } from 'react-bootstrap';
 import { FaDotCircle, FaStarOfDavid } from 'react-icons/fa';
 
-import { useState, useEffect, useContext } from 'react';
+import SettingHelpers from '../../settings/Settings';
+import { useContext } from 'react';
 import { AddCustomisationContext } from '../LogoCustomisation';
 
 const ChoosePosition = (props) => {
-    const { positions, handleLogoPositions } = useContext(AddCustomisationContext);
+    const { positions, errorMessage, handleLogoPositions } = useContext(AddCustomisationContext);
 
     const handleLogoPosition = (event) => {
-        let elementIds = ['left_breast', 'right_breast', 'left_sleeve', 'right_sleeve', 'big_back', 'nape_neck'];
+        const elementIds = SettingHelpers.DefaultPositions();
         let checkedPositions = [];
 
         _.each(elementIds, (elementId) => {
@@ -27,6 +28,9 @@ const ChoosePosition = (props) => {
                 <h4>1. Choose position(s)</h4>
             </Row>
             <Row>
+                {errorMessage &&
+                    <div className="error-text">Please select at least 1 position</div>
+                }
                 <Col>
                     <Card className="logo-card">
                         <Card.Img variant="top" className="logo-image" src="../assets/images/logo_right.jpeg" />
@@ -40,7 +44,8 @@ const ChoosePosition = (props) => {
                             </div>
                             <div className="card-checkbox">
                                 <Form.Group className="mb-3" controlId="left_breast">
-                                    <Form.Check type="checkbox" label="" defaultChecked={positions.includes('left_breast')} data-position="left_breast" onChange={handleLogoPosition} />
+                                    <Form.Check type="checkbox" label="" defaultChecked={positions.includes('left_breast')}
+                                        data-position="left_breast" onChange={handleLogoPosition} />
                                 </Form.Group>
                             </div>
                         </Card.Body>

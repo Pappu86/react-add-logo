@@ -8,7 +8,7 @@ import AddToBasketModal from './AddToBasketModal';
 
 const ProductDetails = ({ match }) => {
     const productId = match.params.id || '';
-    const productInfo = ProductHelpers.GetProductById(productId) || '';
+    const productInfo = ProductHelpers.GetProductById(productId) || null;
     const productSrc = productInfo ? productInfo.src : '';
     const [selectedColor, setSelectedColor] = useState(productInfo.selectedColor);
     const [selectedProductSrc, setSelectedProductSrc] = useState(productSrc);
@@ -20,6 +20,7 @@ const ProductDetails = ({ match }) => {
     // Increment/Decrement Counter
     const [counter, setCounter] = useState(0);
 
+    // Counter Increment/Decrement
     const handleIncDecCounter = (data) => {
         const counterType = data ? data.counterType : '';
         let newValue = data ? data.value * 1 : 0;
@@ -52,7 +53,6 @@ const ProductDetails = ({ match }) => {
         if (medium) newCounterValue += medium;
         if (large) newCounterValue += large;
 
-        // if (!checkbox) document.getElementById(sizeName).click();
         setCounter(newCounterValue);
     };
 
@@ -103,6 +103,7 @@ const ProductDetails = ({ match }) => {
     // Show add to basket modal
     const [show, setShow] = useState(false);
     let modalData = {
+        productId: productId,
         title: productInfo.title,
         selectedColor: selectedColor,
         selectedProductSrc: selectedProductSrc,
@@ -241,7 +242,10 @@ const ProductDetails = ({ match }) => {
                             <hr />
                             <Row>
                                 <Button variant="success addto-btn" className={disableBtnClass} onClick={handleShowModal}> <FaPlus className="add-icon" /> Add to basket</Button>
-                                <AddToBasketModal show={show} onHide={handleClose} modalData={modalData} />
+                                {show &&
+                                    <AddToBasketModal show={show} onHide={handleClose} modalData={modalData} isSmallSize={isSmallSize} />
+                                }
+
                             </Row>
                         </div>
                     </div>

@@ -5,6 +5,18 @@ const AddToBasketModal = (props) => {
     let show = props.show;
     let data = props.modalData;
 
+    // Prepare selected size data
+    const isSmall = document.getElementById('counter_small').value * 1 || 0;
+    const isMedium = document.getElementById('counter_medium').value * 1 || 0;
+    const isLarge = document.getElementById('counter_large').value * 1 || 0;
+    const selectedSize = [];
+
+    if (isSmall) selectedSize.push("small");
+    if (isMedium) selectedSize.push("medium");
+    if (isLarge) selectedSize.push("large");
+
+    data.selectedSize = selectedSize;
+
     return (
         <Modal show={show} onHide={props.onHide}>
             <Modal.Header closeButton>
@@ -31,7 +43,7 @@ const AddToBasketModal = (props) => {
                 </Row>
             </Modal.Body>
             <Modal.Footer>
-                <Link to="/customisation" className="btn btn-success">
+                <Link to={{ pathname: `/customisation`, query: data }} className="btn btn-success">
                     Add your logo now
                 </Link>
                 <Button variant="secondary" onClick={props.onHide}>Close</Button>

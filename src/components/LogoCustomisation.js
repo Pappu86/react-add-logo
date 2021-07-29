@@ -1,32 +1,36 @@
-//import _ from 'underscore';
+import _ from 'underscore';
 import { Container, Row, Col, } from 'react-bootstrap';
 import 'react-step-progress/dist/index.css';
 import StepProgressBar from 'react-step-progress';
 
-import { useState, useEffect, createContext } from 'react';
+import { useState, createContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import ChoosePosition from './stepProgress/ChoosePosition';
 import ApplicationMethod from './stepProgress/ApplicationMethod';
 import Artwork from './stepProgress/Artwork';
 import ApplicationType from './stepProgress/ApplicationType';
 import ConfigureLogo from './stepProgress/ConfigureLogo';
-import _ from 'underscore';
+import SettingHelpers from '../settings/Settings';
+
 
 export const AddCustomisationContext = createContext({});
 
-const LogoCustomisation = () => {
+const LogoCustomisation = ({ location }) => {
     console.log("This is parent");
+    const queryParams = location && location.query ? location.query : null;
+    const productId = queryParams && queryParams.productId ? queryParams.productId : "";
+    const selectedSize = queryParams && _.size(queryParams.selectedSize) ? queryParams.selectedSize : [];
 
     const [selectedPositions, setSelectedPositions] = useState([]);
     const [selectedAppMethod, setSelectedAppMethod] = useState("embroidery");
     const [selectedAppMethodType, setSelectedAppMethodType] = useState("logo");
-
-    // useEffect(() => {
-    //     console.log("--- parent useEffect---- selectedPositions----", selectedPositions);
-    // }, [selectedPositions]);
+    const [selectedLogoManageType, setSelectedLogoManageType] = useState("upload_logo");
+    const [errorMessage, setErrorMessage] = useState(false);
 
     const handleLogoPositions = (data) => {
         const positions = data.positions;
         setSelectedPositions(positions);
+        setErrorMessage("");
     };
 
     const handleAppMethod = (data) => {
@@ -35,14 +39,27 @@ const LogoCustomisation = () => {
     };
 
     const handleAppType = (data) => {
-        console.log("---- Data handleAppType", data);
         const name = data && data.name;
         setSelectedAppMethodType(name);
     };
 
-    function step1Validator() {
-        return true;
-    }
+    const handleManageLogo = (data) => {
+        const name = data && data.type;
+        setSelectedLogoManageType(name);
+    };
+
+    // Step one validator
+    const stepOneValidator = () => {
+        const elementIds = SettingHelpers.DefaultPositions();
+        let isValid = false;
+
+        _.each(elementIds, (elementId) => {
+            let isChecked = document.getElementById(elementId).checked;
+            if (isChecked) isValid = true;
+        });
+        if (!isValid) setErrorMessage(true);
+        return isValid;
+    };
 
     let stepProgress = [
         {
@@ -50,7 +67,7 @@ const LogoCustomisation = () => {
             subtitle: '',
             name: 'step 1',
             content: <ChoosePosition />,
-            validator: step1Validator
+            validator: stepOneValidator
         },
         {
             label: 'Application',
@@ -80,9 +97,7 @@ const LogoCustomisation = () => {
 
 
     function onFormSubmit(e) {
-        // handle the submit logic here
-        // This function will be executed at the last step
-        // when the submit button (next button in the previous steps) is pressed
+        //useHistory.push('/basket');
     }
 
 
@@ -93,16 +108,20 @@ const LogoCustomisation = () => {
             </Row>
             <Row>
                 <AddCustomisationContext.Provider value={{
+                    productId: productId,
                     positions: selectedPositions,
                     methodName: selectedAppMethod,
                     methodTypeName: selectedAppMethodType,
+                    selectedLogoManageType: selectedLogoManageType,
+                    errorMessage: errorMessage,
                     handleLogoPositions,
                     handleAppMethod,
-                    handleAppType
+                    handleAppType,
+                    handleManageLogo
                 }}>
                     <div className="step-bar">
                         <StepProgressBar startingStep={0} onSubmit={onFormSubmit} steps={stepProgress}
-                            stepClass="step-circle" primaryBtnClass="primary-btn" nextBtnName="Continue"
+                            stepClass="step-circle" primaryBtnClass="primary-btn"
                             secondaryBtnClass="secondary-btn" submitBtnName="Finish" />;
                     </div>
                 </AddCustomisationContext.Provider>

@@ -1,11 +1,6 @@
 import { Row, Col, Form } from 'react-bootstrap';
-import { useState } from 'react';
 
 const Artwork = (props) => {
-    console.log("This is child Artwork");
-    console.log("props", props);
-
-    const [isArtwork, setArtwork] = useState(true);
 
     return (
         <div>
@@ -16,7 +11,7 @@ const Artwork = (props) => {
             <Row className="artwork-area active-area">
                 <Col md={1}>
                     <Form.Group className="mb-3" controlId="artwork">
-                        <Form.Check type="radio" label="" defaultChecked={isArtwork} data-type="embroidery" />
+                        <Form.Check type="radio" label="" defaultChecked={true} data-type="embroidery" />
                     </Form.Group>
                 </Col>
                 <Col md={1}>
