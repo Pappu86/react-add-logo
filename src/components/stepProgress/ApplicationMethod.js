@@ -1,54 +1,32 @@
 import { Row, Col, Form } from 'react-bootstrap';
 import { FaBuffer, FaStarOfDavid } from 'react-icons/fa';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AddCustomisationContext } from '../LogoCustomisation';
 
-const ApplicationMethod = (props) => {
+const ApplicationMethod = () => {
     console.log("This is child Application method");
-    console.log("props", props);
+    const { methodName, handleAppMethod } = useContext(AddCustomisationContext);
 
-    props.setStepper(1);
+    console.log("methodName", methodName, "---handleAppMethod: ", handleAppMethod);
 
-    const [isEmbroidery, setEmbroidery] = useState(true);
-    const [isPrint, setPrint] = useState(false);
-
-    const handleAppMethod = (event) => {
+    const appMethodChange = (event) => {
         const applMethodName = event.currentTarget.dataset.type;
         const isChecked = document.getElementById(applMethodName).checked;
-        console.log("applMethodName", applMethodName, "isChecked: ", isChecked);
 
-        document.getElementById(applMethodName).click();
-
-        if (applMethodName === "embroidery" && isChecked) {
-            setEmbroidery(true);
-        } else {
-            setEmbroidery(false);
-        }
-
-        if (applMethodName === "print" && isChecked) {
-            setPrint(true);
-        } else {
-            setPrint(false);
-        }
-
-        props.onClick({ name: applMethodName, value: isChecked });
+        handleAppMethod({ name: applMethodName, value: isChecked });
     };
-
-    useEffect(() => {
-        console.log("isEmbroidery-2222: ", isEmbroidery);
-        console.log("isPrint-2222: ", isPrint);
-    }, []);
-
 
     return (
         <div>
             <Row className="step-title-area">
                 <h4>2. Choose application method</h4>
             </Row>
-            <Row className={`appl-method-area ${isEmbroidery ? "active-area" : ""}`}>
+            <Row className={`appl-method-area ${methodName === "embroidery" ? "active-area" : ""}`}>
                 <Col md={1}>
                     <Form.Group className="mb-3" controlId="embroidery">
-                        <Form.Check type="radio" label="" defaultChecked={isEmbroidery} data-type="embroidery" onClick={handleAppMethod} />
+                        <Form.Check type="radio" name="app_method" label="" defaultChecked={methodName.includes('embroidery')}
+                            data-type="embroidery" onChange={appMethodChange} />
                     </Form.Group>
                 </Col>
                 <Col md={1}><FaStarOfDavid className="method-icon" /></Col>
@@ -57,10 +35,11 @@ const ApplicationMethod = (props) => {
                     <div>Detailed and durable ideal for uniforms.</div>
                 </Col>
             </Row>
-            <Row className={`appl-method-area ${isPrint ? "active-area" : ""}`}>
+            <Row className={`appl-method-area ${methodName === "print" ? "active-area" : ""}`}>
                 <Col md={1}>
                     <Form.Group className="mb-3" controlId="print">
-                        <Form.Check type="radio" label="" defaultChecked={isPrint} data-type="print" onClick={handleAppMethod} />
+                        <Form.Check type="radio" name="app_method" label="" defaultChecked={methodName.includes('print')}
+                            data-type="print" onChange={appMethodChange} />
                     </Form.Group>
                 </Col>
                 <Col md={1}><FaBuffer className="method-icon" /></Col>

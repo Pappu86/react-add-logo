@@ -236,6 +236,7 @@ display: none;
   width: 100%;
   top: 0;
   left: 0;
+  cursor: pointer;
 }
 
 .appl-method-area,
@@ -245,6 +246,7 @@ display: none;
   padding: 30px 0;
   cursor: pointer;
   border: 1px solid transparent;
+  border-radius: 3px;
 }
 
 .appl-method-area .form-check-input{
@@ -263,6 +265,7 @@ display: none;
     display: block;
     margin-left: -35px;
     height: 100px;
+    cursor: pointer;
 }
 
 .active-area{
@@ -278,13 +281,13 @@ display: none;
 
 .new-circle{
   border: 1px dashed #198754;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    line-height: 3;
-    text-align: center;
-    font-weight: 400;
-    color: #198754;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  line-height: 3;
+  text-align: center;
+  font-weight: 400;
+  color: #198754;
 }
 
 .artwork-text{
@@ -303,7 +306,6 @@ display: none;
 
 .form-check [type=radio]{
   font-size: 30px;
-  /* margin-left: -25px; */
 }
 
 /* Setep bar custome */

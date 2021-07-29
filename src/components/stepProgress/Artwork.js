@@ -4,7 +4,6 @@ import { useState } from 'react';
 const Artwork = (props) => {
     console.log("This is child Artwork");
     console.log("props", props);
-    props.setStepper(2);
 
     const [isArtwork, setArtwork] = useState(true);
 
@@ -14,7 +13,7 @@ const Artwork = (props) => {
                 <h4>3. Choose artwork</h4>
                 <small>Add your logo/text</small>
             </Row>
-            <Row className="artwork-area">
+            <Row className="artwork-area active-area">
                 <Col md={1}>
                     <Form.Group className="mb-3" controlId="artwork">
                         <Form.Check type="radio" label="" defaultChecked={isArtwork} data-type="embroidery" />

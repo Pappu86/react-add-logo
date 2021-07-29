@@ -2,40 +2,23 @@ import _ from 'underscore';
 import { Row, Col, Card, Form } from 'react-bootstrap';
 import { FaDotCircle, FaStarOfDavid } from 'react-icons/fa';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { AddCustomisationContext } from '../LogoCustomisation';
 
 const ChoosePosition = (props) => {
-    console.log("This is child Choose position");
-    console.log("props", props);
-
-    props.setStepper(0);
-
-    const [isLeftBreast, setLeftBreast] = useState(false);
-    const [isRightBreast, setRightBreast] = useState(false);
-    const [isLeftsleeve, setLeftSleeve] = useState(false);
-    const [isRightSleeve, setRightSleeve] = useState(false);
-    const [isBigBack, setBigBack] = useState(false);
-    const [isNeck, setNeck] = useState(false);
-
-    useEffect(() => {
-        console.log("selectedPositions_2222: ", props);
-    }, [props]);
+    const { positions, handleLogoPositions } = useContext(AddCustomisationContext);
 
     const handleLogoPosition = (event) => {
-        const position = event.currentTarget.dataset.position;
         let elementIds = ['left_breast', 'right_breast', 'left_sleeve', 'right_sleeve', 'big_back', 'nape_neck'];
-        let selectedArray = [];
+        let checkedPositions = [];
 
         _.each(elementIds, (elementId) => {
             let isChecked = document.getElementById(elementId).checked;
-            if (isChecked) selectedArray.push(elementId);
+            if (isChecked) checkedPositions.push(elementId);
         });
 
-        selectedArray = _.uniq(selectedArray);
-
-        console.log("final_array", selectedArray);
-
-        props.onClick({ positions: selectedArray });
+        checkedPositions = _.uniq(checkedPositions);
+        handleLogoPositions({ positions: checkedPositions });
     };
 
     return (
@@ -57,7 +40,7 @@ const ChoosePosition = (props) => {
                             </div>
                             <div className="card-checkbox">
                                 <Form.Group className="mb-3" controlId="left_breast">
-                                    <Form.Check type="checkbox" label="" defaultChecked={isLeftBreast} data-position="left_breast" onClick={handleLogoPosition} />
+                                    <Form.Check type="checkbox" label="" defaultChecked={positions.includes('left_breast')} data-position="left_breast" onChange={handleLogoPosition} />
                                 </Form.Group>
                             </div>
                         </Card.Body>
@@ -76,7 +59,8 @@ const ChoosePosition = (props) => {
                             </div>
                             <div className="card-checkbox">
                                 <Form.Group className="mb-3" controlId="right_breast">
-                                    <Form.Check type="checkbox" label="" defaultChecked={isRightBreast} data-position="right_breast" onClick={handleLogoPosition} />
+                                    <Form.Check type="checkbox" label="" defaultChecked={positions.includes('right_breast')}
+                                        data-position="right_breast" onChange={handleLogoPosition} />
                                 </Form.Group>
                             </div>
                         </Card.Body>
@@ -95,7 +79,8 @@ const ChoosePosition = (props) => {
                             </div>
                             <div className="card-checkbox">
                                 <Form.Group className="mb-3" controlId="left_sleeve">
-                                    <Form.Check type="checkbox" label="" defaultChecked={isLeftsleeve} data-position="left_sleeve" onClick={handleLogoPosition} />
+                                    <Form.Check type="checkbox" label="" defaultChecked={positions.includes('left_sleeve')}
+                                        data-position="left_sleeve" onChange={handleLogoPosition} />
                                 </Form.Group>
                             </div>
                         </Card.Body>
@@ -116,7 +101,8 @@ const ChoosePosition = (props) => {
                             </div>
                             <div className="card-checkbox">
                                 <Form.Group className="mb-3" controlId="right_sleeve">
-                                    <Form.Check type="checkbox" label="" defaultChecked={isRightSleeve} data-position="right_sleeve" onClick={handleLogoPosition} />
+                                    <Form.Check type="checkbox" label="" defaultChecked={positions.includes('right_sleeve')}
+                                        data-position="right_sleeve" onChange={handleLogoPosition} />
                                 </Form.Group>
                             </div>
                         </Card.Body>
@@ -135,7 +121,8 @@ const ChoosePosition = (props) => {
                             </div>
                             <div className="card-checkbox">
                                 <Form.Group className="mb-3" controlId="big_back">
-                                    <Form.Check type="checkbox" label="" defaultChecked={isBigBack} data-position="big_back" onClick={handleLogoPosition} />
+                                    <Form.Check type="checkbox" label="" defaultChecked={positions.includes('big_back')}
+                                        data-position="big_back" onChange={handleLogoPosition} />
                                 </Form.Group>
                             </div>
                         </Card.Body>
@@ -154,7 +141,8 @@ const ChoosePosition = (props) => {
                             </div>
                             <div className="card-checkbox">
                                 <Form.Group className="mb-3" controlId="nape_neck">
-                                    <Form.Check type="checkbox" label="" defaultChecked={isNeck} data-position="nape_neck" onClick={handleLogoPosition} />
+                                    <Form.Check type="checkbox" label="" defaultChecked={positions.includes('nape_neck')}
+                                        data-position="nape_neck" onChange={handleLogoPosition} />
                                 </Form.Group>
                             </div>
                         </Card.Body>
