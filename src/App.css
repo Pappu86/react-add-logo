@@ -32,7 +32,7 @@ body{
 
 .page-title{
   padding: 10px;
-  color: #198754;
+  color: #4db193;
   text-align: center;
 }
 
@@ -112,8 +112,10 @@ margin-bottom: 0 !important;
   margin-bottom: 20px;
 }
 
-.product-title{
-  color: #198754;
+.product-title,
+.modal-title{
+  color: #389479;
+  /* color: #4db193; */
 }
 
 .plain-price{
@@ -457,4 +459,13 @@ div[id^=font-picker] ul li button:focus {
   padding: 20px;
   border-radius: 3px;
   font-size: 20px;
+}
+
+.back-to-home{
+  padding: 20px;
+  text-align: center;
+}
+.back-to-home a{ 
+  width: 150px;
+  margin: 0 auto;
 }

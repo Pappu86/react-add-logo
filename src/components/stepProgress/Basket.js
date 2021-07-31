@@ -1,6 +1,6 @@
 import _ from 'underscore';
 import { Container, Row, Col, } from 'react-bootstrap';
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import ProductHelpers from '../../settings/ProductsArray';
 import SettingHelpers from '../../settings/Settings';
 
@@ -75,6 +75,9 @@ const Basket = (props) => {
                 <Col><small>Items: {getTotalItems()}</small></Col>
                 <Col></Col>
                 <Col className="sub-total">£{getSubTotal()}</Col>
+            </Row>
+            <Row className="back-to-home">
+                <Link to="/" className="btn btn-primary"> {'<<'} Back to home</Link>
             </Row>
         </Container>
     )

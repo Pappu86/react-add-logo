@@ -37,7 +37,7 @@ const ProductHelpers = {
                 src: "../assets/images/uc507_navy.jpeg",
                 minPrice: 9.17,
                 maxPrice: 11.52,
-                color: 3,
+                color: 6,
                 colors: ['black', 'grey', 'navy', 'blue', 'purple', 'olive'],
                 selectedColor: 'navy',
                 isPrint: false,

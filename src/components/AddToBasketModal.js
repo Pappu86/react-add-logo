@@ -20,7 +20,7 @@ const AddToBasketModal = (props) => {
     return (
         <Modal show={show} onHide={props.onHide}>
             <Modal.Header closeButton>
-                <Modal.Title>Added to basket</Modal.Title>
+                <Modal.Title className="modal-title">Added to basket</Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <Row>
@@ -30,7 +30,7 @@ const AddToBasketModal = (props) => {
                         </Card>
                     </Col>
                     <Col xs={6} md={6} lg={6}>
-                        <h4>{data.title}</h4>
+                        <h4 className="product-title">{data.title}</h4>
                         <div>Product code: {data.code}</div>
                         <div>Color: <span className="text-upercase">{data.selectedColor}</span></div>
                         <div>Items: {data.totalItems}</div>
@@ -43,7 +43,7 @@ const AddToBasketModal = (props) => {
                 </Row>
             </Modal.Body>
             <Modal.Footer>
-                <Link to={{ pathname: `/customisation`, query: data }} className="btn btn-success">
+                <Link to={{ pathname: `/customisation`, query: data }} className="btn btn-primary">
                     Add your logo now
                 </Link>
                 <Button variant="secondary" onClick={props.onHide}>Close</Button>

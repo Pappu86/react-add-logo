@@ -10,7 +10,7 @@ const Product = ({ product }) => {
                     <Card.Img variant="top" src={product.src} />
                 </Link>
                 <Card.Body>
-                    <Card.Title>{product.title}</Card.Title>
+                    <Card.Title className="product-title">{product.title}</Card.Title>
                     <Card.Text>
                         <span>£{product.minPrice}{' '}-{' '}£{product.maxPrice}</span>
                         <span>{' '}ex. VAT</span>

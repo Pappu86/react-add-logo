@@ -241,7 +241,7 @@ const ProductDetails = ({ match }) => {
                             </Row>
                             <hr />
                             <Row>
-                                <Button variant="success addto-btn" className={disableBtnClass} onClick={handleShowModal}> <FaPlus className="add-icon" /> Add to basket</Button>
+                                <Button variant="primary addto-btn" className={disableBtnClass} onClick={handleShowModal}> <FaPlus className="add-icon" /> Add to basket</Button>
                                 {show &&
                                     <AddToBasketModal show={show} onHide={handleClose} modalData={modalData} isSmallSize={isSmallSize} />
                                 }
