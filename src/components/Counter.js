@@ -19,10 +19,7 @@ const Counter = (props) => {
             currentValue = currentValue * 1 + 1;
         }
 
-        console.log("currentValue", currentValue, counterType);
-
         if (counterType === 'dec' && currentValue) {
-            console.log("counterType", counterType);
             currentValue = currentValue * 1 - 1;
 
             if (currentValue < 1) {

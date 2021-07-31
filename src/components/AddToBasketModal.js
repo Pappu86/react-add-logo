@@ -6,14 +6,14 @@ const AddToBasketModal = (props) => {
     let data = props.modalData;
 
     // Prepare selected size data
-    const isSmall = document.getElementById('counter_small').value * 1 || 0;
-    const isMedium = document.getElementById('counter_medium').value * 1 || 0;
-    const isLarge = document.getElementById('counter_large').value * 1 || 0;
+    const small = document.getElementById('counter_small').value * 1 || 0;
+    const medium = document.getElementById('counter_medium').value * 1 || 0;
+    const large = document.getElementById('counter_large').value * 1 || 0;
     const selectedSize = [];
 
-    if (isSmall) selectedSize.push("small");
-    if (isMedium) selectedSize.push("medium");
-    if (isLarge) selectedSize.push("large");
+    if (small) selectedSize.push({ size: "small", value: small });
+    if (medium) selectedSize.push({ size: "medium", value: medium });
+    if (large) selectedSize.push({ size: "large", value: large });
 
     data.selectedSize = selectedSize;
 

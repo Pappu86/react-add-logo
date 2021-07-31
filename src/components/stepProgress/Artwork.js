@@ -9,15 +9,15 @@ const Artwork = (props) => {
                 <small>Add your logo/text</small>
             </Row>
             <Row className="artwork-area active-area">
-                <Col md={1}>
+                <Col xs={2} md={1} lg={1}>
                     <Form.Group className="mb-3" controlId="artwork">
                         <Form.Check type="radio" label="" defaultChecked={true} data-type="embroidery" />
                     </Form.Group>
                 </Col>
-                <Col md={1}>
+                <Col xs={2} md={1} lg={1}>
                     <div className="new-circle">NEW</div>
                 </Col>
-                <Col md={3} className="artwork-text">Add a new customisation</Col>
+                <Col xs={3} md={3} lg={3} className="artwork-text">Add a new customisation</Col>
                 <Col className="artwork-text">+ £8.95 One-Time Logo Setup Fee</Col>
             </Row>
         </div>

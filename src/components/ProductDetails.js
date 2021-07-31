@@ -181,7 +181,7 @@ const ProductDetails = ({ match }) => {
                         <div className="title">2. Sizes & Quantities</div>
                         <div className="size-box-area">
                             <Row className="size-row">
-                                <Col xs={6} md={6} lg={7} className="size-items">
+                                <Col xs={5} md={5} lg={7} className="size-items">
                                     <Form.Group className="mb-3" controlId="small">
                                         <Form.Check type="checkbox" label="S" onClick={handleChangeChk} data-size="small" defaultChecked={isSmallSize} />
                                     </Form.Group>
@@ -189,12 +189,12 @@ const ProductDetails = ({ match }) => {
                                 <Col xs={2} md={2} lg={2}>
                                     <small>In Stock</small>
                                 </Col>
-                                <Col xs={4} md={4} lg={3} className="counter-area">
+                                <Col xs={5} md={5} lg={3} className="counter-area">
                                     <Counter fieldName="small" onClick={handleIncDecCounter} onChange={handleCounterChange} />
                                 </Col>
                             </Row>
                             <Row className="size-row">
-                                <Col xs={6} md={6} lg={7} className="size-items">
+                                <Col xs={5} md={5} lg={7} className="size-items">
                                     <Form.Group className="mb-3" controlId="medium">
                                         <Form.Check type="checkbox" label="M" onClick={handleChangeChk} data-size="medium" defaultChecked={isMediumSize} />
                                     </Form.Group>
@@ -202,12 +202,12 @@ const ProductDetails = ({ match }) => {
                                 <Col xs={2} md={2} lg={2}>
                                     <small>In Stock</small>
                                 </Col>
-                                <Col xs={4} md={4} lg={3} className="counter-area">
+                                <Col xs={5} md={5} lg={3} className="counter-area">
                                     <Counter fieldName="medium" onClick={handleIncDecCounter} onChange={handleCounterChange} />
                                 </Col>
                             </Row>
                             <Row className="size-row">
-                                <Col xs={6} md={6} lg={7} className="size-items">
+                                <Col xs={5} md={5} lg={7} className="size-items">
                                     <Form.Group className="mb-3" controlId="large">
                                         <Form.Check type="checkbox" label="L" onClick={handleChangeChk} data-size="large" defaultChecked={isLargSize} />
                                     </Form.Group>
@@ -215,7 +215,7 @@ const ProductDetails = ({ match }) => {
                                 <Col xs={2} md={2} lg={2}>
                                     <small>In Stock</small>
                                 </Col>
-                                <Col xs={4} md={4} lg={3} className="counter-area">
+                                <Col xs={5} md={5} lg={3} className="counter-area">
                                     <Counter fieldName="large" onClick={handleIncDecCounter} onChange={handleCounterChange} />
                                 </Col>
                             </Row>

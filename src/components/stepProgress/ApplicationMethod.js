@@ -40,27 +40,27 @@ const ApplicationMethod = () => {
                 </div>
             </Row>
             <Row className={`appl-method-area ${methodName === "embroidery" ? "active-area" : ""} ${isDisableEmbroidery ? "disable-embroidery" : ""} `}>
-                <Col md={1}>
+                <Col xs={2} md={2} lg={1}>
                     <Form.Group className="mb-3 `{}`" controlId="embroidery">
                         <Form.Check type="radio" name="app_method" label="" defaultChecked={methodName.includes('embroidery')}
                             data-type="embroidery" onChange={appMethodChange} />
                     </Form.Group>
                 </Col>
-                <Col md={1}><FaStarOfDavid className="method-icon" /></Col>
-                <Col md={10}>
+                <Col xs={2} md={2} lg={1}><FaStarOfDavid className="method-icon" /></Col>
+                <Col xs={8} md={8} lg={10}>
                     <div>Embroidery (Stitching)</div>
                     <div>Detailed and durable ideal for uniforms.</div>
                 </Col>
             </Row>
             <Row className={`appl-method-area ${methodName === "print" ? "active-area" : ""}`}>
-                <Col md={1}>
+                <Col xs={2} md={2} lg={1}>
                     <Form.Group className="mb-3" controlId="print">
                         <Form.Check type="radio" name="app_method" label="" defaultChecked={methodName.includes('print')}
                             data-type="print" onChange={appMethodChange} />
                     </Form.Group>
                 </Col>
-                <Col md={1}><FaBuffer className="method-icon" /></Col>
-                <Col md={10}>
+                <Col xs={2} md={2} lg={1}><FaBuffer className="method-icon" /></Col>
+                <Col xs={8} md={8} lg={10}>
                     <div>Print</div>
                     <div>Vivid and flexible ideal for general use.</div>
                 </Col>

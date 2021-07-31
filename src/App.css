@@ -427,3 +427,34 @@ div[id^=font-picker] ul li button:focus {
 .dropzone p{
   margin-top: 55px;
 }
+
+/* My basket style */
+.my-basket-item{
+  background: #fff;
+  border-radius: 3px;
+  padding: 20px 0;
+  margin-bottom: 20px;
+}
+
+.my-basket-item img{
+  width: 100px;    
+}
+
+.my-basket-item .color-text{
+  text-transform: capitalize;
+}
+
+.position-name{
+  color: #397cf6;
+}
+.item-price, .sub-total{
+  font-size: 20px;
+  color: #198754;
+}
+
+.sub-total-area{
+  background: #fff;
+  padding: 20px;
+  border-radius: 3px;
+  font-size: 20px;
+}

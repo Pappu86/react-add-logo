@@ -4,7 +4,7 @@ import 'react-step-progress/dist/index.css';
 import StepProgressBar from 'react-step-progress';
 
 import { useState, createContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import ChoosePosition from './stepProgress/ChoosePosition';
 import ApplicationMethod from './stepProgress/ApplicationMethod';
 import Artwork from './stepProgress/Artwork';
@@ -15,11 +15,12 @@ import SettingHelpers from '../settings/Settings';
 
 export const AddCustomisationContext = createContext({});
 
-const LogoCustomisation = ({ location }) => {
-    console.log("This is parent");
+const LogoCustomisation = ({ location, data }) => {
     const queryParams = location && location.query ? location.query : null;
-    const productId = queryParams && queryParams.productId ? queryParams.productId : "";
+    const productId = queryParams && queryParams.productId ? queryParams.productId : 1;
     const selectedSize = queryParams && _.size(queryParams.selectedSize) ? queryParams.selectedSize : [];
+    const selectedColor = queryParams && queryParams.selectedColor ? queryParams.selectedColor : "black";
+    const selectedProductSrc = queryParams && queryParams.selectedProductSrc ? queryParams.selectedProductSrc : "";
 
     const [selectedPositions, setSelectedPositions] = useState([]);
     const [selectedAppMethod, setSelectedAppMethod] = useState("embroidery");
@@ -96,10 +97,23 @@ const LogoCustomisation = ({ location }) => {
     ];
 
 
-    function onFormSubmit(e) {
-        //useHistory.push('/basket');
-    }
+    const history = useHistory();
 
+    function onFormSubmit(e) {
+        let newData = {
+            productId,
+            selectedPositions,
+            selectedAppMethod,
+            selectedAppMethodType,
+            selectedLogoManageType,
+            errorMessage,
+            selectedSize,
+            selectedColor,
+            selectedProductSrc
+        };
+
+        history.push('/basket', newData);
+    }
 
     return (
         <Container fluid className="logo-customisation">
